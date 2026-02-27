@@ -428,7 +428,7 @@ namespace Poker
                         const string fileName = "scores.txt";
                         Console.WriteLine("Vous pouvez saisir votre nom (ou pseudo) : ");
                         nom = Console.ReadLine();
-                        using (f = new BinaryWriter(new FileStream("scores.txt", FileMode.Append, FileAccess.Write)))
+                        using (f = new BinaryWriter(new FileStream("scores.txt", FileMode.Create, FileAccess.Write)))
                         {
                             f.Write(nom);
                             for (int a=0; a < 5; a++)

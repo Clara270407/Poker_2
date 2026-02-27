@@ -13,11 +13,11 @@
   "project": {
     "version": "1.0.0",
     "restore": {
-      "projectUniqueName": "C:\\Users\\c.langloisrucheton\\Documents\\GitHub\\Poker\\test\\test\\test.csproj",
+      "projectUniqueName": "C:\\Users\\c.langloisrucheton\\Documents\\GitHub\\Poker_2\\test\\test\\test.csproj",
       "projectName": "test",
-      "projectPath": "C:\\Users\\c.langloisrucheton\\Documents\\GitHub\\Poker\\test\\test\\test.csproj",
+      "projectPath": "C:\\Users\\c.langloisrucheton\\Documents\\GitHub\\Poker_2\\test\\test\\test.csproj",
       "packagesPath": "C:\\Users\\c.langloisrucheton\\.nuget\\packages\\",
-      "outputPath": "C:\\Users\\c.langloisrucheton\\Documents\\GitHub\\Poker\\test\\test\\obj\\",
+      "outputPath": "C:\\Users\\c.langloisrucheton\\Documents\\GitHub\\Poker_2\\test\\test\\obj\\",
       "projectStyle": "PackageReference",
       "configFilePaths": [
         "C:\\Users\\c.langloisrucheton\\AppData\\Roaming\\NuGet\\NuGet.Config",
