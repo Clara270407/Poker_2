@@ -112,44 +112,92 @@ Le test pour la Double-Paire utilise le compteur ```compte```, incrémenté dans
 #### Brelan
 
 ```c#
-       
+if (similaire[k] == 3)
+{
+    result = combinaison.BRELAN;
+    b = true;
+} 
 ```
-Le test pour le brelan verifie la présence ou non d'un 3 dans le tableau similaire.
+Le test pour le brelan verifie la présence ou non de 3 dans le tableau similaire.
 
 #### Carre
 
 ```c#
-       
+if (similaire[k] == 4)
+{
+    result = combinaison.CARRE;
+}    
 ```
 Le test pour le carre, comme pour le brelan et la paire, verifie la présence ou non d'un 4 dans le tableau similaire.
 
 #### Quinte
 
 ```c#
-       
-```
-Le test pour la quinte commenece par verifier que tout les éléments sont bien différents puis les comparent au tableau ```quintes``` qui regroupe toutes les possibilités de quinte gagnante.
+for (int l = 0; l < 5; l++)
+{
+    if (similaire[l] == 1)
+    {
+        c += 1; 
+    }
+   
+}
 
+if (c == 5)
+{
+    for (int m = 0; m < 4; m++)
+    {
+        compte2 = 0;
+        for (int n = 0; n < 5; n++)
+        {
+            for (int p2 = 0; p2 < 5; p2++)
+            {
+                if (unJeu[n].valeur == quintes[m, p2])
+                {
+                    compte2++;
+                }
+
+                if (compte2 == 5)
+                {
+                    result = combinaison.QUINTE;
+                }
+            }
+            
+        }
+    }
+} 
+```
+Le test pour la quinte décompose en deux parties, la première boucle vérifie que tout les élèments de ```similaire``` sont unique et stock ce résultat. Puis, la deuxième partie compare le jeu aux élèments present dans la variable ```char[,] quintes = { { 'X', 'V', 'D', 'R', 'A' }, { '9', 'X', 'V', 'D', 'R' }, { '8', '9', 'X', 'V', 'D' }, { '7', '8', '9', 'X', 'V' } };```.
+Si tout les éléments correspondent à l'une des propositions, le resultat devient Quinte.
 #### Full
 
 ```c#
-       
+if (p && b)
+{
+    result = combinaison.FULL;
+} 
 ```
-Le test pour full verifie s'il y eu une paire et un brelan
-
-#### Quinte Flush
-
-```c#
-       
-```
-Le test pour la Quinte Flush verifie que les 5 cartes ont la même famille puis qu'il y a une quinte
+Le test pour full ce sert des tests pour la paire et le brelan pour vérifier que le jeu contienne bien les deux.
 
 #### Couleur
 
 ```c#
-        
+if (famille[k] == 5 && result != combinaison.QUINTE)
+{
+    result = combinaison.COULEUR;
+}     
 ```
-Le test pour la Couleur verifie que les 5 cartes ont la même famille puis qu'il n'y a pas de quinte
+Le test pour la Couleur verifie que les 5 cartes ont la même famille puis qu'il n'y a pas de quinte.
+
+#### Quinte Flush
+
+```c#
+if (famille[k] == 5 && result == combinaison.QUINTE)
+{
+    result = combinaison.QUINTE_FLUSH;
+}   
+```
+Le test pour la Quinte Flush verifie que les 5 cartes ont la même famille puis utilise le test de la quinte pour verifier s'il y en a une.
+
 
 ### Echange Carte
 
