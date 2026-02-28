@@ -75,13 +75,11 @@ namespace Poker
         public static carte tirage()
         {
             // la fonction commence par créer une carte vide puis selectionne une valeur et une famille aléatoirement avec Random
-            // enfin on applique valeur et famille à la nouvelle carte
+            // Puis on déclare une carte avec la valeur et la famille que l'on vient de choisir
             carte carte_tire;
             Random rnd = new Random();
-            int v = rnd.Next(0, 13);
-            int f = rnd.Next(0, 4);
-            carte_tire.valeur = valeurs[v];
-            carte_tire.famille = familles[f];
+            carte_tire.valeur = valeurs[rnd.Next(0, 13)];
+            carte_tire.famille = familles[rnd.Next(0, 4)];
             return carte_tire;
         }
 
@@ -93,11 +91,11 @@ namespace Poker
             bool resultat = true; // on part du principe que notre carte est bien unique
             for(int i = 0; i < 5; i++)
             {
-                if (i != numero) // on evite de compare la carte avec elle même
+                if (i != numero) // on evite de compare la carte avec elle même pour limiter les erreurs possible
                 {
-                    if (uneCarte.valeur == unJeu[i].valeur && uneCarte.famille == unJeu[i].famille) // on verifie s'il y une carte identique
+                    if (uneCarte.valeur == unJeu[i].valeur && uneCarte.famille == unJeu[i].famille) // on verifie si la carte est déjà dans le jeu
                     {
-                        resultat = false;
+                        resultat = false; // si elle est déjà présente la variable passe à false et le reste
 
                     }
                 }
@@ -110,7 +108,8 @@ namespace Poker
         // La valeur retournée est un élement de l'énumération 'combinaison' (=constante)
         public static combinaison cherche_combinaison(ref carte[] unJeu)
         {
-            // On défini 2 tableaux vident pour pouvoir compter les élèments similaires
+            // On défini 2 tableaux vide qui compteront d'un cote les valeurs identiques et de l'autre les familles identique
+            // On défini en même temps tutes les variables qui seront utiles par la suite
 
             combinaison result = new combinaison();
             result = combinaison.RIEN;
@@ -176,7 +175,7 @@ namespace Poker
                 }
 
                 // Quinte
-                // avec c on commence par verifier si toutes les valeurs sont uniques et si elles le sont on a une quinte
+                // avec c on commence par verifier si toutes les valeurs sont uniques
                 for (int l = 0; l < 5; l++)
                 {
                     if (similaire[l] == 1)
@@ -185,12 +184,12 @@ namespace Poker
                     }
                    
                 }
-
+                // Puis on verifie la possibilité d'une Quinte en comparant le Jeu à la liste des quintes possibles
                 if (c == 5)
                 {
                     for (int m = 0; m < 4; m++)
                     {
-                        compte2 = 0;
+                        compte2 = 0; // on remet la variable à zéro à chaque fois qu'on change de liste dans quinte
                         for (int n = 0; n < 5; n++)
                         {
                             for (int p2 = 0; p2 < 5; p2++)
@@ -199,7 +198,7 @@ namespace Poker
                                 {
                                     compte2++;
                                 }
-
+                                // si une liste correspond au Jeu alors la combinaison est une quinte
                                 if (compte2 == 5)
                                 {
                                     result = combinaison.QUINTE;
@@ -211,21 +210,21 @@ namespace Poker
                 }
 
                 // Test Full
-                // Le Full reprend les resultat des test pour une paire et un brelan et verifie s'il y a les deux
+                // Le Full reprend les resultat des test pour une paire et un brelan et verifie si les deux ont été trouvé plus tot
                 if (p && b)
                 {
                     result = combinaison.FULL;
                 }
 
                 // Test Couleur
-                // Le test vérifie que les 5 cartes ont la même famille mais sans quinte
+                // Le test vérifie que les 5 cartes ont la même famille en utilisant le tableau famille créé au début et qu'il n'y a pas de quinte
                 if (famille[k] == 5 && result != combinaison.QUINTE)
                 {
                     result = combinaison.COULEUR;
                 }
 
                 // Test Quinte Flush
-                // Le test vérifie que les 5 cartes ont la même famille et s'il y a eu une quinte
+                // Le test vérifie que les 5 cartes ont la même famille en utilisant le tableau famille créé au début et s'il y a eu une quinte
                 if (famille[k] == 5 && result == combinaison.QUINTE)
                 {
                     result = combinaison.QUINTE_FLUSH;
@@ -237,7 +236,7 @@ namespace Poker
 
         // Echange des cartes
         // Paramètres : le tableau de 5 cartes et le tableau des numéros des cartes à échanger
-        // On regarder chaque element dans e puis on modifie dans unJeu les cartes aux indices présent dans e
+        // On regarder chaque elements dans e puis on modifie dans unJeu les cartes aux indices présent dans e
         private static void echangeCarte(ref carte[] unJeu, ref int[] e)
         {
             // on échange la carte à l'indice e dans unJeu par une autre que l'on créer avec la fonction tirage
