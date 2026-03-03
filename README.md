@@ -55,8 +55,6 @@ Elle se décompose ensuite en 8 sous-parties qui testent les combinaisons possib
 ```c#
 public static combinaison cherche_combinaison(ref carte[] unJeu)
 {
-    // On défini 2 tableaux vident pour pouvoir compter les élèments similaires
-
     combinaison result = new combinaison();
     result = combinaison.RIEN;
     int[] similaire = { 0, 0, 0, 0, 0 };
@@ -68,7 +66,6 @@ public static combinaison cherche_combinaison(ref carte[] unJeu)
     bool b = false;
     bool p = false;
 
-    // Permet la recherches des éléments de la même famille et/ou de la même valeur
     for (int i = 0; i < unJeu.Length; i++)
     {
         for (int j = 0; j < unJeu.Length; j++)
