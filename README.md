@@ -1,7 +1,7 @@
 # Poker
 [![forthebadge](https://forthebadge.com/badges/made-with-c-sharp.svg)](https://forthebadge.com)
 
-Le programme suit le cahier des charges fournit par l'entreprise Home Sweet Home afin de créer un jeu s'inspirant du Poker.
+Le programme suit le cahier des charges fournit par le service de direction des Systeme d'Information de l'entreprise Home Sweet Home afin de créer un jeu s'inspirant du Poker.
 
 ## Les Fonctions 
 
@@ -245,7 +245,7 @@ private static void tirageDuJeu(ref carte[] unJeu)
 
 ### Affichage Carte
 
-La fonction ```affichageCarte()``` permet l'affichage des cartes, cette fonction gere donc la couleur et l'affichage des caractères spécifiques aux familles
+La fonction ```affichageCarte()``` permet l'affichage des cartes, cette fonction gere donc la couleur et l'affichage des caractères spécifiques aux familles ♥, ♦, ♠ et ♣
 
 ```c#
 private static void affichageCarte(ref carte uneCarte)
