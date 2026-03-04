@@ -209,24 +209,84 @@ if (famille[k] == 5 && result == combinaison.QUINTE)
 
 ### Echange Carte
 
-La fonction ```echangeCarte()``` verifie si une carte existe déjà à un emplacement donné.
+La fonction ```echangeCarte()``` permet d'échanger les cartes selectionner par le joueur et dont les index ont été stocké dans la variable e. Les cartes échangée sont toutes uniques.
 
 ```c#
-
+private static void echangeCarte(ref carte[] unJeu, ref int[] e)
+{
+    for (int i = 0; i < e.Length; i++)
+    {
+        do
+        {
+            MonJeu[e[i]] = tirage();
+        }
+        while (carteUnique(MonJeu[i], MonJeu, i) == false);
+    }
+}
 ```
 
 ### Tirage du Jeu
 
-La fonction ```tirageDuJeu()``` utilise la fonction ```tirage()``` pour créer un jeu de 5 cartes.
+La fonction ```tirageDuJeu()``` utilise la fonction ```tirage()``` pour créer un jeu de 5 cartes où toutes les cartes sont uniques.
 
 ```c#
-
+private static void tirageDuJeu(ref carte[] unJeu)
+{
+    for (int i = 0; i < 5; i++)
+    {
+        do
+        {
+            MonJeu[i] = tirage();
+        }
+        while (carteUnique(MonJeu[i], MonJeu, i) == false);
+    }
+}
 ```
 
 ### Affichage Carte
 
-La fonction ```affichageCarte()``` permet l'affichage des cartes
+La fonction ```affichageCarte()``` permet l'affichage des cartes, cette fonction gere donc la couleur et l'affichage des caractères spécifiques aux familles
 
 ```c#
+private static void affichageCarte(ref carte uneCarte)
+{
+    int left = 0;
+    int c = 1;
+    // Tirage aléatoire de 5 cartes
+    for (int i = 0; i < 5; i++)
+    {
+        if (MonJeu[i].famille == '\u2665' || MonJeu[i].famille == '\u2666')
+            SetConsoleTextAttribute(hConsole, 252);
+        else
+            SetConsoleTextAttribute(hConsole, 240);
+        Console.SetCursorPosition(left, 5);
+        Console.Write("{0}{1}{2}{3}{4}{5}{6}{7}{8}{9}{10}\n", '*', '-', '-', '-', '-', '-', '-', '-', '-', '-', '*');
+        Console.SetCursorPosition(left, 6);
+        Console.Write("{0}{1}{2}{3}{4}{5}{6}{7}{8}{9}{10}\n", '|', (char)MonJeu[i].famille, ' ', (char)MonJeu[i].famille, ' ', (char)MonJeu[i].famille, ' ', (char)MonJeu[i].famille, ' ', (char)MonJeu[i].famille, '|');
+        Console.SetCursorPosition(left, 7);
+        Console.Write("{0}{1}{2}{3}{4}{5}{6}{7}{8}{9}{10}\n", '|', ' ', ' ', ' ', ' ', ' ', ' ', ' ', ' ', ' ', '|');
+        Console.SetCursorPosition(left, 8);
+        Console.Write("{0}{1}{2}{3}{4}{5}{6}{7}{8}{9}{10}\n", '|', (char)MonJeu[i].famille, ' ', ' ', ' ', ' ', ' ', ' ', ' ', (char)MonJeu[i].famille, '|');
+        Console.SetCursorPosition(left, 9);
+        Console.Write("{0}{1}{2}{3}{4}{5}{6}{7}{8}{9}{10}\n", '|', ' ', ' ', ' ', (char)MonJeu[i].valeur, (char)MonJeu[i].valeur, (char)MonJeu[i].valeur, ' ', ' ', ' ', '|');
+        Console.SetCursorPosition(left, 10);
+        Console.Write("{0}{1}{2}{3}{4}{5}{6}{7}{8}{9}{10}\n", '|', (char)MonJeu[i].famille, ' ', ' ', (char)MonJeu[i].valeur, (char)MonJeu[i].valeur, (char)MonJeu[i].valeur, ' ', ' ', (char)MonJeu[i].famille, '|');
+        Console.SetCursorPosition(left, 11);
+        Console.Write("{0}{1}{2}{3}{4}{5}{6}{7}{8}{9}{10}\n", '|', ' ', ' ', ' ', (char)MonJeu[i].valeur, (char)MonJeu[i].valeur, (char)MonJeu[i].valeur, ' ', ' ', ' ', '|');
+        Console.SetCursorPosition(left, 12);
+        Console.Write("{0}{1}{2}{3}{4}{5}{6}{7}{8}{9}{10}\n", '|', (char)MonJeu[i].famille, ' ', ' ', ' ', ' ', ' ', ' ', ' ', (char)MonJeu[i].famille, '|');
+        Console.SetCursorPosition(left, 13);
+        Console.Write("{0}{1}{2}{3}{4}{5}{6}{7}{8}{9}{10}\n", '|', ' ', ' ', ' ', ' ', ' ', ' ', ' ', ' ', ' ', '|');
+        Console.SetCursorPosition(left, 14);
+        Console.Write("{0}{1}{2}{3}{4}{5}{6}{7}{8}{9}{10}\n", '|', (char)MonJeu[i].famille, ' ', (char)MonJeu[i].famille, ' ', (char)MonJeu[i].famille, ' ', (char)MonJeu[i].famille, ' ', (char)MonJeu[i].famille, '|');
+        Console.SetCursorPosition(left, 15);
+        Console.Write("{0}{1}{2}{3}{4}{5}{6}{7}{8}{9}{10}\n", '*', '-', '-', '-', '-', '-', '-', '-', '-', '-', '*');
+        Console.SetCursorPosition(left, 16);
+        SetConsoleTextAttribute(hConsole, 10);
+        Console.Write("{0}{1}{2}{3}{4}{5}{6}{7}{8}{9}{10}\n", ' ', ' ', ' ', ' ', ' ', c, ' ', ' ', ' ', ' ', ' ');
+        left = left + 15;
+        c++;
+    }
 
+}
 ```
