@@ -85,6 +85,8 @@ public static combinaison cherche_combinaison(ref carte[] unJeu)
     
 ```
 
+### Les combinaisons
+
 #### Paire
 
 Le test pour la paire verifie la présence ou non d'un 2 dans le tableau ```similaire```.
@@ -288,5 +290,72 @@ private static void affichageCarte(ref carte uneCarte)
         c++;
     }
 
+}
+```
+
+### Enregistrer le résultat
+
+Le code permet aussi d'enregistrer notre jeu avec le nom du joueur
+```c#
+if (enregister == 'O')
+{
+    const string fileName = "scores.txt";
+    Console.WriteLine("Vous pouvez saisir votre nom (ou pseudo) : ");
+    nom = Console.ReadLine();
+    using (f = new BinaryWriter(new FileStream("scores.txt", FileMode.Create, FileAccess.Write)))
+    {
+        f.Write(nom);
+        for (int a=0; a < 5; a++)
+        {
+            f.Write(MonJeu[a].valeur);
+            f.Write(MonJeu[a].famille);
+        }
+    }
+
+}
+```
+
+
+### Afficher un résultat enregistré
+
+Le code permet de lire les résultats enregistrer.
+```c#
+if (File.Exists("scores.txt"))
+{
+    using (BinaryReader f = new BinaryReader(new FileStream("scores.txt", FileMode.Open, FileAccess.Read)))
+    {
+        // On commence par récupérer le nom du joueur
+        nom = f.ReadString();
+        for (int k = 0; k < 5; k++)
+        {
+            // On récupère la valeur de notre carte et on l'enregistre dans un jeu
+            MonJeu[k].valeur = f.ReadChar();
+
+            // On récupère ensuite la famille de la carte et on compare ce résultat aux possibilités avant de l'ajouter au Jeu
+            a1 = f.ReadChar();
+            if (Char.ToString(a1) == "e")
+            {
+                MonJeu[k].famille = '\u2665';
+            }
+            else if (Char.ToString(a1) == "f")
+            {
+                MonJeu[k].famille = '\u2666';
+            }
+            else if(Char.ToString(a1) == "c")
+            {
+                MonJeu[k].famille = '\u2660';
+            }
+            else
+            {
+                MonJeu[k].famille = '\u2663';
+            }
+            // On se sert d'un readChar pour passer les 3 éléments inutile
+            a2 = f.ReadChars(3);
+        }
+        
+    }
+    Console.WriteLine("Nom : " + nom);
+    affichageCarte(ref MonJeu[0]);
+    Console.ReadKey();
 }
 ```
