@@ -48,7 +48,7 @@ public static bool carteUnique(carte uneCarte, carte[] unJeu, int numero)
 
 ### Cherche Combinaison
 
-La fonction ```cherche_combinaison()``` permet de vérifier si le jeu contient une combinaison gagnante.
+La fonction ```cherche_combinaison()``` permet de vérifier si le jeu contient une combinaison.
 Pour cela, elle commence par verifier le nombre d'occurence des valeurs et familles, puis les stockent dans les tableaux ```similaire = { 0, 0, 0, 0, 0 };``` et ```famille = { 0, 0, 0, 0, 0 };```.
 Elle se décompose ensuite en 8 sous-parties qui testent les combinaisons possibles.
 
