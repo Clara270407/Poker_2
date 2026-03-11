@@ -3,12 +3,14 @@
 
 Le programme suit le cahier des charges fournit par le service de direction des Systeme d'Information de l'entreprise Home Sweet Home afin de créer un jeu s'inspirant du Poker.
 
+Le programme s'inspire du poker pour créer un jeu dont le but est d'obtenir la plus haute combinaison possible. Le jeu tire 5 cartes parmis les 52 possibles et laisse la possibilité à l'utilisateur de les échangers une fois.
+
 ## Les Fonctions 
 
 ### Tirage
 
-La fonction ```tirage()``` permet de créer une seule des cartes de notre jeu.
-Pour ce faire la fonction crée une carte avec une valeur et une famille séléctionnée de manière aléatoire en utilisant la classe ```Random()```.
+La fonction ```tirage()``` permet de créer une carte.
+Pour ce faire la fonction crée une carte avec une valeur et une famille séléctionnées de manière aléatoire en utilisant la classe ```Random()```.
 
 ```c#
 public static carte tirage()
@@ -26,7 +28,7 @@ public static carte tirage()
 ### Carte Unique
 
 La fonction ```carteUnique()``` permet de vérifier si une carte existe déjà dans le jeu afin d'éviter les doublons.
-Elle part du principe que notre carte est bien unique et stock cette donnée dans le bolléen ```résultat```, la fonction compare ensuite les cartes et ne change la variable résultat que si elle rencontre une carte identique.
+Elle part du principe que notre carte est bien unique et stock cette donnée dans le bolléen ```résultat```, la fonction compare ensuite les cartes et ne change la variable ```résultat``` que si elle rencontre une carte identique.
 
 ```c#
 public static bool carteUnique(carte uneCarte, carte[] unJeu, int numero)
@@ -48,8 +50,8 @@ public static bool carteUnique(carte uneCarte, carte[] unJeu, int numero)
 
 ### Cherche Combinaison
 
-La fonction ```cherche_combinaison()``` permet de vérifier si le jeu contient une combinaison.
-Pour cela, elle commence par verifier le nombre d'occurence des valeurs et familles, puis les stockent dans les tableaux ```similaire = { 0, 0, 0, 0, 0 };``` et ```famille = { 0, 0, 0, 0, 0 };```.
+La fonction ```cherche_combinaison()``` permet de vérifier si le jeu contient une des combinaisons.
+Pour cela, elle commence par verifier le nombre d'occurence des valeurs et des familles, puis les stockent dans les tableaux ```similaire = { 0, 0, 0, 0, 0 };``` et ```famille = { 0, 0, 0, 0, 0 };```.
 Elle se décompose ensuite en 8 sous-parties qui testent les combinaisons possibles.
 
 ```c#
@@ -89,8 +91,8 @@ public static combinaison cherche_combinaison(ref carte[] unJeu)
 
 #### Paire
 
-Le test pour la paire verifie la présence ou non d'un 2 dans le tableau ```similaire```.
-Le test met également à jour un compteur ```compte``` pour chaque occurence du 2.
+Le test pour la paire verifie la présence d'un "2" dans le tableau ```similaire```.
+Le test met également à jour un compteur ```compte``` pour chaque occurence de 2.
 Enfin, il met à jour une variable de type booléen p pour qu'elle soit égale à true.
 
 ```c#
@@ -104,7 +106,7 @@ if (similaire[k] == 2)
 
 #### Double-Paire
 
-Le test pour la Double-Paire utilise le compteur ```compte```, incrémenté dans le test pour la paire, afien de verifier le nombre de paires présentent dans le jeu. Pour ce faire, le test divise par 2 le nombre de "2" trouvé par compte et vérifie si le résultat donne 2.
+Le test pour la Double-Paire utilise le compteur ```compte```, incrémenté dans le test pour la paire, afin de verifier le nombre de paires présentent dans le jeu. Pour ce faire, le test verifie si le nombre de "2" dans similaire est paire.
 
 ```c#
 if (compte / 2 == 2)
@@ -115,7 +117,7 @@ if (compte / 2 == 2)
 
 #### Brelan
 
-Le test pour le brelan verifie la présence ou non de 3 dans le tableau similaire.
+Le test pour le brelan verifie la présence d'un 3 dans le tableau similaire.
 
 ```c#
 if (similaire[k] == 3)
@@ -127,7 +129,7 @@ if (similaire[k] == 3)
 
 #### Carre
 
-Le test pour le carre, comme pour le brelan et la paire, verifie la présence ou non d'un 4 dans le tableau similaire.
+Le test pour le carre, comme pour le brelan et la paire, verifie la présence d'un 4 dans le tableau similaire.
 
 ```c#
 if (similaire[k] == 4)
@@ -138,7 +140,7 @@ if (similaire[k] == 4)
 
 #### Quinte
 
-Le test pour la quinte décompose en deux parties, la première boucle vérifie que tout les élèments de ```similaire``` sont unique et stock ce résultat. Puis, la deuxième partie compare le jeu aux élèments present dans la variable ```char[,] quintes = { { 'X', 'V', 'D', 'R', 'A' }, { '9', 'X', 'V', 'D', 'R' }, { '8', '9', 'X', 'V', 'D' }, { '7', '8', '9', 'X', 'V' } };```.
+Le test pour la quinte ce décompose en deux parties, la première boucle vérifie que tout les élèments de ```similaire``` sont unique et stock ce résultat. Puis, la deuxième partie compare le jeu aux élèments present dans la variable ```char[,] quintes = { { 'X', 'V', 'D', 'R', 'A' }, { '9', 'X', 'V', 'D', 'R' }, { '8', '9', 'X', 'V', 'D' }, { '7', '8', '9', 'X', 'V' } };```.
 Si tout les éléments correspondent à l'une des propositions, le resultat devient Quinte.
 
 ```c#
@@ -178,7 +180,7 @@ if (c == 5)
 
 #### Full
 
-Le test pour full ce sert des tests pour la paire et le brelan pour vérifier que le jeu contienne bien les deux.
+Le test pour full ce sert des tests pour la paire et le brelan pour vérifier que le jeu est bien les deux.
 
 ```c#
 if (p && b)
@@ -189,7 +191,7 @@ if (p && b)
 
 #### Couleur
 
-Le test pour la Couleur verifie que les 5 cartes ont la même famille puis qu'il n'y a pas de quinte.
+Le test pour la Couleur verifie que les 5 cartes ont la même famille puis s'assure qu'il n'y a pas de quinte.
 
 ```c#
 if (famille[k] == 5 && result != combinaison.QUINTE)
@@ -211,7 +213,7 @@ if (famille[k] == 5 && result == combinaison.QUINTE)
 
 ### Echange Carte
 
-La fonction ```echangeCarte()``` permet d'échanger les cartes selectionner par le joueur et dont les index ont été stocké dans la variable e. Les cartes échangée sont toutes uniques.
+La fonction ```echangeCarte()``` permet d'échanger les cartes selectionner par le joueur et dont les index ont été stocké dans la variable e. La fonction vérifie également que les cartes seront uniques.
 
 ```c#
 private static void echangeCarte(ref carte[] unJeu, ref int[] e)
@@ -247,7 +249,7 @@ private static void tirageDuJeu(ref carte[] unJeu)
 
 ### Affichage Carte
 
-La fonction ```affichageCarte()``` permet l'affichage des cartes, cette fonction gere donc la couleur et l'affichage des caractères spécifiques aux familles ♥, ♦, ♠ et ♣
+La fonction ```affichageCarte()``` permet l'affichage des cartes, cette fonction gère donc la couleur et l'affichage des caractères spécifiques aux familles ♥, ♦, ♠ et ♣
 
 ```c#
 private static void affichageCarte(ref carte uneCarte)
@@ -295,7 +297,7 @@ private static void affichageCarte(ref carte uneCarte)
 
 ### Enregistrer le résultat
 
-Le code permet aussi d'enregistrer notre jeu avec le nom du joueur
+Le code permet aussi d'enregistrer notre jeu avec le nom du joueur.
 ```c#
 if (enregister == 'O')
 {
@@ -318,20 +320,17 @@ if (enregister == 'O')
 
 ### Afficher un résultat enregistré
 
-Le code permet de lire les résultats enregistrer.
+Le code permet de lire les résultats enregistrer. Pour ce faire, il lit le résultat enregistré dans le fichier score puis créé un jeu  à partir de ces données.
 ```c#
 if (File.Exists("scores.txt"))
 {
     using (BinaryReader f = new BinaryReader(new FileStream("scores.txt", FileMode.Open, FileAccess.Read)))
     {
-        // On commence par récupérer le nom du joueur
         nom = f.ReadString();
         for (int k = 0; k < 5; k++)
-        {
-            // On récupère la valeur de notre carte et on l'enregistre dans un jeu
+        { 
             MonJeu[k].valeur = f.ReadChar();
 
-            // On récupère ensuite la famille de la carte et on compare ce résultat aux possibilités avant de l'ajouter au Jeu
             a1 = f.ReadChar();
             if (Char.ToString(a1) == "e")
             {
@@ -349,7 +348,7 @@ if (File.Exists("scores.txt"))
             {
                 MonJeu[k].famille = '\u2663';
             }
-            // On se sert d'un readChar pour passer les 3 éléments inutile
+
             a2 = f.ReadChars(3);
         }
         
