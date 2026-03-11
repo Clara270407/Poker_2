@@ -297,7 +297,7 @@ private static void affichageCarte(ref carte uneCarte)
 
 ### Enregistrer le résultat
 
-Le code permet aussi d'enregistrer notre jeu avec le nom du joueur
+Le code permet aussi d'enregistrer notre jeu avec le nom du joueur.
 ```c#
 if (enregister == 'O')
 {
@@ -320,20 +320,17 @@ if (enregister == 'O')
 
 ### Afficher un résultat enregistré
 
-Le code permet de lire les résultats enregistrer.
+Le code permet de lire les résultats enregistrer. Pour ce faire, il lit le résultat enregistré dans le fichier score puis créé un jeu  à partir de ces données.
 ```c#
 if (File.Exists("scores.txt"))
 {
     using (BinaryReader f = new BinaryReader(new FileStream("scores.txt", FileMode.Open, FileAccess.Read)))
     {
-        // On commence par récupérer le nom du joueur
         nom = f.ReadString();
         for (int k = 0; k < 5; k++)
-        {
-            // On récupère la valeur de notre carte et on l'enregistre dans un jeu
+        { 
             MonJeu[k].valeur = f.ReadChar();
 
-            // On récupère ensuite la famille de la carte et on compare ce résultat aux possibilités avant de l'ajouter au Jeu
             a1 = f.ReadChar();
             if (Char.ToString(a1) == "e")
             {
@@ -351,7 +348,7 @@ if (File.Exists("scores.txt"))
             {
                 MonJeu[k].famille = '\u2663';
             }
-            // On se sert d'un readChar pour passer les 3 éléments inutile
+
             a2 = f.ReadChars(3);
         }
         
