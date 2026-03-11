@@ -108,7 +108,7 @@ namespace Poker
         // La valeur retournée est un élement de l'énumération 'combinaison' (=constante)
         public static combinaison cherche_combinaison(ref carte[] unJeu)
         {
-            // On défini 2 tableaux vide qui compteront d'un cote les valeurs identiques et de l'autre les familles identique
+            // On défini 2 tableaux vide qui compteront d'un cote les valeurs identiques et de l'autre les familles identiques
             // On défini en même temps tutes les variables qui seront utiles par la suite
 
             combinaison result = new combinaison();
@@ -341,7 +341,6 @@ namespace Poker
                 Console.WriteLine("{0}{1}{2}{3}{4}{5}{6}{7}{8}{9}{10}\n", '*', '-', '-', '-', '-', '-', '-', '-', '-', '-', '*');
                 Console.WriteLine();
                 // Lecture du choix
-
 
                 do
                 {
